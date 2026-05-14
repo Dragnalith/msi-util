@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <string_view>
 
-namespace msi_util {
+namespace msiutil {
 namespace detail {
 
 static void utf8_append_char32(std::string &out, char32_t cp) {
@@ -338,4 +338,4 @@ MsiPackage parse_msi(CompoundFile &cfb) {
   return pkg;
 }
 
-} // namespace msi_util
+} // namespace msiutil

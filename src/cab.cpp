@@ -5,7 +5,7 @@
 #include <cstring>
 #include <stdexcept>
 
-namespace msi_util {
+namespace msiutil {
 
 namespace {
 
@@ -178,4 +178,4 @@ bool extract_cab(const std::vector<uint8_t> &cab,
   return true;
 }
 
-} // namespace msi_util
+} // namespace msiutil

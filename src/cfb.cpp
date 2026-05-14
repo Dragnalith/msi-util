@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace msi_util {
+namespace msiutil {
 
 namespace {
 
@@ -341,4 +341,4 @@ CompoundFile::read_named_stream(std::string_view want) {
   return std::nullopt;
 }
 
-} // namespace msi_util
+} // namespace msiutil

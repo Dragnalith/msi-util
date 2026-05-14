@@ -13,7 +13,7 @@ PLATFORMS = [
 ]
 
 cc_binary(
-    name = "msi-util",
+    name = "msiutil",
     srcs = [
         "src/main.cpp",
         "src/cfb.cpp",
@@ -33,7 +33,7 @@ cc_binary(
 [
     platform_transition_binary(
         name = "for_" + platform.split(":")[1],
-        binary = ":msi-util",
+        binary = ":msiutil",
         tags = ["manual"],
         target_platform = platform,
     )

@@ -6,7 +6,7 @@
 #include <string_view>
 #include <vector>
 
-namespace msi_util {
+namespace msiutil {
 
 /// Minimal read-only Compound File Binary (OLE) reader for MSI files.
 class CompoundFile {
@@ -59,4 +59,4 @@ private:
   [[nodiscard]] int find_sid_by_path(const std::string &path) const;
 };
 
-} // namespace msi_util
+} // namespace msiutil

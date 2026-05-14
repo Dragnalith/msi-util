@@ -63,10 +63,10 @@ static void write_file(const fs::path &root, const std::string &rel,
 
 static int cmd_list_cab(const fs::path &msi_path) {
   auto raw = read_entire_file(msi_path);
-  msi_util::CompoundFile cfb(std::move(raw));
-  const auto pkg = msi_util::parse_msi(cfb);
+  msiutil::CompoundFile cfb(std::move(raw));
+  const auto pkg = msiutil::parse_msi(cfb);
   for (const auto &c : pkg.cab_files) {
-    const std::string line = msi_util::normalize_cabinet_entry(c);
+    const std::string line = msiutil::normalize_cabinet_entry(c);
     if (!line.empty())
       std::cout << line << '\n';
   }
@@ -75,21 +75,21 @@ static int cmd_list_cab(const fs::path &msi_path) {
 
 static int cmd_extract(const fs::path &out_dir, const fs::path &msi_path) {
   auto raw = read_entire_file(msi_path);
-  msi_util::CompoundFile cfb(std::move(raw));
-  const auto pkg = msi_util::parse_msi(cfb);
+  msiutil::CompoundFile cfb(std::move(raw));
+  const auto pkg = msiutil::parse_msi(cfb);
   const fs::path msi_abs = fs::absolute(msi_path);
   const fs::path msi_dir = msi_abs.parent_path();
 
   for (const std::string &cab_ref : pkg.cab_files) {
     std::vector<uint8_t> cab_bytes;
     if (!cab_ref.empty() && cab_ref[0] == '#') {
-      const std::string want = msi_util::normalize_cabinet_entry(cab_ref);
+      const std::string want = msiutil::normalize_cabinet_entry(cab_ref);
       std::optional<std::vector<uint8_t>> emb;
       for (size_t sid = 0; sid < cfb.entries().size(); ++sid) {
         const auto &e = cfb.entries()[sid];
         if (e.type != 2)
           continue;
-        const std::string dec = msi_util::decode_msi_entry_name(e.name16);
+        const std::string dec = msiutil::decode_msi_entry_name(e.name16);
         if (ieq_sv(dec, want) || ieq_sv(e.name, want)) {
           emb = cfb.read_stream_sid(sid);
           break;
@@ -105,7 +105,7 @@ static int cmd_extract(const fs::path &out_dir, const fs::path &msi_path) {
       cab_bytes = read_entire_file(cab_path);
     }
 
-    const bool ok = msi_util::extract_cab(
+    const bool ok = msiutil::extract_cab(
         cab_bytes, [&](const std::string &name, const std::vector<uint8_t> &data) {
           const auto it = pkg.file_map.find(name);
           if (it == pkg.file_map.end())
@@ -122,7 +122,7 @@ static int cmd_extract(const fs::path &out_dir, const fs::path &msi_path) {
 }
 
 int main(int argc, const char **argv) {
-  argparse::ArgumentParser program("msi-util", "",
+  argparse::ArgumentParser program("msiutil", "",
                                    argparse::default_arguments::help);
 
   argparse::ArgumentParser list_cmd("list-cab", "",

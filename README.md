@@ -1,4 +1,4 @@
-# msi-util [![Build Status](https://github.com/Dragnalith/msi-util/actions/workflows/build.yml/badge.svg)](https://github.com/Dragnalith/msi-util/actions/workflows/build.yml)
+# msiutil [![Build Status](https://github.com/Dragnalith/msiutil/actions/workflows/build.yml/badge.svg)](https://github.com/Dragnalith/msiutil/actions/workflows/build.yml)
 
 Small CLI utility to unpacks MSI packages
 
@@ -6,7 +6,7 @@ Small CLI utility to unpacks MSI packages
 ## Build
 
 ```bash
-bazel build //:msi-util
+bazel build //:msiutil
 ```
 
 Release-style binaries for all supported platforms:

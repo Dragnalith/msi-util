@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace msi_util {
+namespace msiutil {
 
 struct MsiPackage {
   std::map<std::string, std::string> file_map;
@@ -21,4 +21,4 @@ struct MsiPackage {
 /// Decode an MSI CFB UTF-16 stream name (same rules as Windows Installer).
 [[nodiscard]] std::string decode_msi_entry_name(const std::u16string &name16);
 
-} // namespace msi_util
+} // namespace msiutil
